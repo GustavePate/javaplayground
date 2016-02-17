@@ -16,10 +16,10 @@ import playground.yo.servlet.AkkaServlet;
  * Hello world!
  *
  */
-public class AkkaTester 
+public class AkkaTester
 {
 	static final Logger log = LoggerFactory.getLogger(AkkaTester.class);
-	
+
     public static void main( String[] args )
     {
     	Server server = new Server(7070);
@@ -32,11 +32,11 @@ public class AkkaTester
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
         log.info("Up and running !");
-        
+
         HelloAkka ha = new HelloAkka();
         //ha.doit();
-        
+
     }
 }
