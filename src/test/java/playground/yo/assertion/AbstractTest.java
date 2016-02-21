@@ -36,7 +36,7 @@ public abstract class AbstractTest {
 	
 	public abstract void test_collection_size_contains();
 	
-	public abstract void test_exception();
+	public abstract void test_exception() throws Exception;
 	
 	public abstract void test_error_wo_message();
 	

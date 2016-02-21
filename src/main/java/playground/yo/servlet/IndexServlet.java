@@ -12,26 +12,24 @@ import org.eclipse.jetty.http.HttpStatus;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import playground.yo.service.AkkaService;
-import playground.yo.service.YoService;
-
 @Singleton
-public class AkkaServlet extends HttpServlet {
-	private static final long serialVersionUID = 5338707275509245258L;
-	
+public class IndexServlet  extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4771386446534975600L;
+
 	@Inject
-	public AkkaServlet(){
+	public IndexServlet(){
 		
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-
 		
-		AkkaService akka = new AkkaService(req, resp);
-		akka.doIt();
-		resp.setStatus(HttpStatus.OK_200);
+		resp.setStatus(HttpStatus.NOT_FOUND_404);
 	}
-
+	
 }
