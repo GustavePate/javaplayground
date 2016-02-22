@@ -5,11 +5,8 @@ import java.util.EnumSet;
 import javax.servlet.DispatcherType;
 
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.handler.ContextHandler;
-import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.servlet.StatisticsServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,10 +14,9 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceFilter;
 
-import playground.yo.servlet.YoServlet;
 import playground.yo.injection.ApplicationServletModule;
-import playground.yo.injection.NonServletModule;
-import playground.yo.servlet.AkkaServlet;
+import playground.yo.injection.DAOModule;
+import playground.yo.injection.ServiceModule;
 
 /**
  * Hello world!
@@ -33,9 +29,10 @@ public class AkkaTester
     public static void main( String[] args )
     {
     	
-    	NonServletModule nonServletModule = new NonServletModule();
+    	DAOModule daoModule = new DAOModule();
+    	ServiceModule serviceModule = new ServiceModule();
     	ApplicationServletModule applicationServletModule = new ApplicationServletModule();
-    	Injector injector = Guice.createInjector(nonServletModule, applicationServletModule);
+    	Injector injector = Guice.createInjector(serviceModule, applicationServletModule, daoModule);
     	
     	Server server = new Server(7070);
     	
