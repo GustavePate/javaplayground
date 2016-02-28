@@ -19,22 +19,19 @@ public class SeleniumGoogle {
 	}
 	
 	@Test
-	public void testGoogle(){
+	public void testGoogle() throws InterruptedException{
         driver.get("http://www.google.com");
         assertThat(driver.getTitle()).isEqualTo("Google");
         //by id
         driver.findElement(By.id("lst-ib")).sendKeys("arkea");
         //css selector
         driver.findElement(By.cssSelector("button[value=Rechercher]")).click();
+		
+        //obligé d'attendre :(
+        Thread.sleep(2000);
         //count results
-        driver.findElements(By.cssSelector(".g")).size();
+        assertThat(driver.findElements(By.cssSelector("div.g")).size()).isGreaterThan(5);
         
-        try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
         
         
 	}
