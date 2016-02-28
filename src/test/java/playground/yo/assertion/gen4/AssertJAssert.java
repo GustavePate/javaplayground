@@ -86,11 +86,13 @@ public class AssertJAssert extends AbstractTest{
 		                               .containsOnly(aragorn, frodon, legolas, boromir, gollum);
 
 		/**** variant 3 ****/
+		
 		// combining filtering and extraction (yes we can)
 		assertThat(fellowshipOfTheRing).filteredOn(character -> character.getName().contains("o"))
-		                               .containsOnly(aragorn, frodon, legolas, boromir, gollum)
-		                               .extracting(character -> character.getRace().getName())
-		                               .contains("hobbit", "elf", "human");
+									   .containsOnly(aragorn, frodon, legolas, boromir, gollum)
+									   .extracting(character -> character.getRace().getName())
+									   .contains("hobbit", "elf", "human");
+		
 	}
 	
 	@Test

@@ -105,15 +105,18 @@ public class HamcrestAssert extends AbstractTest{
 		List<Personnage> pers_v2 = fellowshipOfTheRing.stream().filter(p->p.getName().contains("o")).collect(Collectors.toList());
 		assertThat(pers_v2, hasItems(aragorn, frodon, legolas, boromir, gollum));
 		assertThat(pers_v2.size(), is(5));
-		
 		/**** variant 3 ****/
-		// combining filtering and extraction (yes we can)
-		List<Personnage> pers_v3 = fellowshipOfTheRing.stream().filter(p->p.getName().contains("o")).collect(Collectors.toList());
+		
+		// combining filtering and extraction (no we cannot)
+		List<Personnage> pers_v3 = fellowshipOfTheRing.stream().filter(
+				p->p.getName().contains("o")).collect(Collectors.toList());
 		assertThat(pers_v3, hasItems(aragorn, frodon, legolas, boromir, gollum));
 		assertThat(pers_v3.size(), is(5));
-		
-		List<String> pers_v3_1 = pers_v3.stream().map(p->p.getRace().getName()).collect(Collectors.toList());
+
+		List<String> pers_v3_1 = pers_v3.stream().map(
+				p->p.getRace().getName()).collect(Collectors.toList());
 		assertThat(pers_v3_1, hasItems("hobbit", "elf","human"));
+		
 	}
 	
 	@Test
