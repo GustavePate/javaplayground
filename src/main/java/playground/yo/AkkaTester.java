@@ -1,5 +1,8 @@
 package playground.yo;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.EnumSet;
 
 import javax.servlet.DispatcherType;
@@ -67,6 +70,14 @@ public class AkkaTester
 
         log.info("Up and running !");
 
+        //Fireup database
+        try {
+			Connection conn = DriverManager.getConnection("jdbc:h2:./db/h2/test", "sa", "");
+		} catch (SQLException e1) {
+			log.error("pb with db", e1);
+		}
+        
+        
         
         HelloAkka ha = new HelloAkka();
         //ha.doit();
