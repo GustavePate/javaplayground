@@ -2,7 +2,7 @@
 
 * Arbo Junit / Cucumber avec Injection
 * Modèle de tests de charge
-
+* Jacoco
 
 # TODO
 
@@ -10,11 +10,12 @@
 	* [http://stackoverflow.com/questions/483087/overriding-binding-in-guice](http://stackoverflow.com/questions/483087/overriding-binding-in-guice)
 * Utiliser les annotations metrics
 * Découpages des DAO Thrift
+* Mockito
 * H2 db pour les tests
 * Versioning des schémas de base de données
    * outil ?
 	* [http://martinfowler.com/articles/evodb.html](http://martinfowler.com/articles/evodb.html)
-   * [coding horro](http://blog.codinghorror.com/get-your-database-under-version-control/)
+   * [coding horror](http://blog.codinghorror.com/get-your-database-under-version-control/)
    
    create table VersionHistory (
       Version int primary key,
@@ -24,7 +25,15 @@
       tests_passed boolean (default false)
     );   
    
-* Mockito
+   DB Workflow
+   
+   * Create DB
+   * Apply Change
+   * Test
+   * If ok:
+      * mark change as valid
+      * dump db  
+   
 * Dump des métriques chez les système
 * Dump des métriques dans Kibana
 * Akka
