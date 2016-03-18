@@ -1,8 +1,11 @@
 # En cours
 
-* Arbo Junit / Cucumber avec Injection
-* Modèle de tests de charge
-* Jacoco
+* AssertJ everywhere
+* Doc Mock
+* ID Request à propager
+
+* Exemple Jenkins
+
 
 # TODO
 
@@ -11,6 +14,7 @@
 * Utiliser les annotations metrics
 * Découpages des DAO Thrift
 * Mockito
+* Cucumber servlet
 * H2 db pour les tests
 * Versioning des schémas de base de données
    * outil ?
@@ -44,12 +48,19 @@
 	* unit test
 	* test composant
 	* test perf
+   * Jacoco: lancement depuis eclipse
 * Codelabs sur les tech utilisées (Junit / Mockito / Guice / Cucumber / Jackson)  
 * Minisite publiable / appli
 * Archetype Batch / Test des batchs
+* Junit Scope (ignorer certains tests)
+* Injection de module par annotation (Jukito / GuiceBerry)
+
+
 
 # Done
 
+* Modèle de tests de charge
+* Arbo Junit / Cucumber avec Injection
 * conf accessible depuis les tests unit / composants
 * injection accessible depuis les tests unit / composants
 * world accessible depuis les tests unit / composants
@@ -58,3 +69,6 @@
 * Metrics nb error par défaut
 * Metriques agrégées évolutions des temps de réponse / nb appels
 * resitution graphique des métriques
+* Jacoco junit
+* Jacoco cucumber
+* info-build.json
