@@ -1,17 +1,16 @@
 # En cours
 
+* Surcharge de l'injection sur les tests uniatires
+	* [http://stackoverflow.com/questions/483087/overriding-binding-in-guice](http://stackoverflow.com/questions/483087/overriding-binding-in-guice)
+* Utiliser les annotations metrics
 * AssertJ everywhere
 * Doc Mock
 * ID Request à propager
-
 * Exemple Jenkins
 
 
 # TODO
 
-* Surcharge de l'injection sur les tests uniatires
-	* [http://stackoverflow.com/questions/483087/overriding-binding-in-guice](http://stackoverflow.com/questions/483087/overriding-binding-in-guice)
-* Utiliser les annotations metrics
 * Découpages des DAO Thrift
 * Mockito
 * Cucumber servlet
@@ -54,6 +53,7 @@
 * Archetype Batch / Test des batchs
 * Junit Scope (ignorer certains tests)
 * Injection de module par annotation (Jukito / GuiceBerry)
+* Hystrix
 
 
 
