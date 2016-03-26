@@ -9,12 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.name.Named;
 
 import play.ground.dao.fake.FakeDAO;
 import play.ground.dao.fake.dto.FakeDTO;
-import play.ground.dao.fake.impl.FakeDAODefault;
  
 public class YoService extends Service{
 

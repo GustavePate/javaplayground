@@ -13,7 +13,6 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import play.ground.service.AkkaService;
-import play.ground.service.YoService;
 
 @Singleton
 public class AkkaServlet extends HttpServlet {

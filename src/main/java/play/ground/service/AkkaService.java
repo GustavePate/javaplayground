@@ -15,7 +15,6 @@ import play.ground.AkkaWorld;
 import play.ground.dao.fake.actor.FakeDAOActor;
 import play.ground.dao.fake.dto.FakeDTO;
 import scala.concurrent.duration.Duration;
-import scala.concurrent.duration.FiniteDuration;
 
 public class AkkaService extends Service {
 	HttpServletRequest req;

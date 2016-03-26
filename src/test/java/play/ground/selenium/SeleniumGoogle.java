@@ -7,7 +7,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -39,7 +38,7 @@ public class SeleniumGoogle {
 		assertThat(driver.getTitle()).isEqualTo("Google");
 
 		// by id: remplir le champ de recherche
-		driver.findElement(By.id("lst-ib")).sendKeys("arkea");
+		driver.findElement(By.id("lst-ib")).sendKeys("des petits chats");
 
 		// css selector: cliquer sur le bouton rechercher
 		driver.findElement(By.cssSelector("button[value=Search]")).click();
@@ -52,7 +51,7 @@ public class SeleniumGoogle {
 	public void testGoogle() throws InterruptedException {
 		assertThat(driver.getTitle()).isEqualTo("Google");
 		// by id
-		driver.findElement(By.id("lst-ib")).sendKeys("arkea");
+		driver.findElement(By.id("lst-ib")).sendKeys("des petits chats");
 		// css selector
 		driver.findElement(By.cssSelector("button[value=Search]")).click();
 
@@ -73,7 +72,7 @@ public class SeleniumGoogle {
 
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		// by id
-		driver.findElement(By.id("lst-ib")).sendKeys("arkea");
+		driver.findElement(By.id("lst-ib")).sendKeys("des petits chats");
 		// css selector
 		driver.findElement(By.cssSelector("button[value=Search]")).click();
 
@@ -92,7 +91,7 @@ public class SeleniumGoogle {
 		assertThat(driver.getTitle()).isEqualTo("Google");
 
 		// by id
-		driver.findElement(By.name("q")).sendKeys("arkea");
+		driver.findElement(By.name("q")).sendKeys("des petits chats");
 		// css selector
 		driver.findElement(By.cssSelector("button[value=Search]")).click();
 

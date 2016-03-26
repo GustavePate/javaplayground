@@ -1,15 +1,11 @@
 package play.ground.assertion.gen3;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-import org.hamcrest.Matcher;
-import org.hamcrest.core.AnyOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

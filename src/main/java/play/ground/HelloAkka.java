@@ -6,8 +6,6 @@ import akka.actor.ActorSystem;
 import akka.actor.Props;
 import akka.actor.Inbox;
 import scala.concurrent.duration.Duration;
-import scala.concurrent.duration.FiniteDuration;
-
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;

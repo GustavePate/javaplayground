@@ -4,7 +4,6 @@ import akka.actor.UntypedActor;
 import play.ground.dao.fake.FakeDAO;
 import play.ground.dao.fake.dto.FakeDTO;
 import play.ground.dao.fake.impl.FakeDAODefault;
-import play.ground.dao.fake.impl.FakeDAOMock;
 
 public class FakeDAOActor extends UntypedActor  {
         FakeDTO dto;
