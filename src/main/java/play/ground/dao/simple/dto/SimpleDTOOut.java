@@ -10,5 +10,10 @@ public class SimpleDTOOut extends GenericDTO {
 	public String getName(){
 		return name;
 	}
+
+	public String functionnalPK(){
+		return id;
+	}
+	
 	
 }

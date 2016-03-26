@@ -1,5 +1,8 @@
 package play.ground.dao;
 
-public class GenericDTO {
+
+public abstract class GenericDTO {
+	
+	public abstract String functionnalPK(); 
 
 }
