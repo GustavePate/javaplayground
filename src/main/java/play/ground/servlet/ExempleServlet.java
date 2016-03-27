@@ -13,24 +13,24 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
-import play.ground.service.YoService;
+import play.ground.service.ExempleService;
 
 @Singleton
-public class YoServlet extends HttpServlet {
+public class ExempleServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 5338707271409245258L;
 	
 	@Inject
-	private Provider<YoService> serviceProvider;
+	private Provider<ExempleService> serviceProvider;
 	
 	@Inject
-	public YoServlet(){ 
+	private ExempleServlet(){ 
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		YoService yo = serviceProvider.get();
+		ExempleService yo = serviceProvider.get();
 		yo.doIt(req, resp);
 		resp.setStatus(HttpStatus.OK_200);
 	}

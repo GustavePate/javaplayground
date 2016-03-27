@@ -11,9 +11,9 @@ import com.google.inject.name.Names;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
-import play.ground.dao.fake.FakeDAO;
-import play.ground.dao.fake.impl.FakeDAODefault;
-import play.ground.dao.fake.impl.FakeDAOMock;
+import play.ground.dao.exemple.ExempleDAO;
+import play.ground.dao.exemple.impl.ExempleDAODefault;
+import play.ground.dao.exemple.impl.ExempleDAOMock;
 
 public class DAOModule extends AbstractModule {
 	
@@ -36,12 +36,12 @@ public class DAOModule extends AbstractModule {
 		bind(Config.class).annotatedWith(Names.named("conf")).toInstance(conf);
 		
 		// Bind DAOs
-		if ("mock".equalsIgnoreCase(props.getProperty("fakedao.mode"))){
+		if ("true".equalsIgnoreCase(props.getProperty("mock.fakedao", "false"))){
 			log.info("FakeDAO mode mock");
-			bind(FakeDAO.class).to(FakeDAOMock.class);
+			bind(ExempleDAO.class).to(ExempleDAOMock.class);
 		}else{
 			log.info("FakeDAO mode regular");
-			bind(FakeDAO.class).to(FakeDAODefault.class);
+			bind(ExempleDAO.class).to(ExempleDAODefault.class);
 		}
 	}
 	

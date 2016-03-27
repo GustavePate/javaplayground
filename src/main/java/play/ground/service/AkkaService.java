@@ -12,11 +12,11 @@ import akka.actor.ActorSystem;
 import akka.actor.Inbox;
 import akka.actor.Props;
 import play.ground.AkkaWorld;
-import play.ground.dao.fake.actor.FakeDAOActor;
-import play.ground.dao.fake.dto.FakeDTO;
+import play.ground.dao.exemple.actor.ExempleDAOActor;
+import play.ground.dao.exemple.dto.ExempleDTO;
 import scala.concurrent.duration.Duration;
 
-public class AkkaService extends Service {
+public class AkkaService extends GenericService {
 	HttpServletRequest req;
 	HttpServletResponse resp;
 
@@ -33,14 +33,14 @@ public class AkkaService extends Service {
 			// recuperation du system
 			final ActorSystem system = AkkaWorld.getSystem();
 			// should be done just one time
-			final ActorRef fakedao = system.actorOf(Props.create(FakeDAOActor.class), "fakedao");
+			final ActorRef fakedao = system.actorOf(Props.create(ExempleDAOActor.class), "fakedao");
 			
 			
 			final Inbox inbox = Inbox.create(system);
-			FakeDTO daoresp;
+			ExempleDTO daoresp;
 			inbox.send(fakedao, "c'est genial akka");
 			try {
-				daoresp = (FakeDTO) inbox.receive(Duration.create(5, TimeUnit.SECONDS));
+				daoresp = (ExempleDTO) inbox.receive(Duration.create(5, TimeUnit.SECONDS));
 				this.resp.getWriter().println(String.valueOf(daoresp.compute));
 			} catch (TimeoutException e) {
 				log.error("Timout", e);

@@ -1,18 +1,18 @@
-package play.ground.dao.fake.actor;
+package play.ground.dao.exemple.actor;
 
 import akka.actor.UntypedActor;
-import play.ground.dao.fake.FakeDAO;
-import play.ground.dao.fake.dto.FakeDTO;
-import play.ground.dao.fake.impl.FakeDAODefault;
+import play.ground.dao.exemple.ExempleDAO;
+import play.ground.dao.exemple.dto.ExempleDTO;
+import play.ground.dao.exemple.impl.ExempleDAODefault;
 
-public class FakeDAOActor extends UntypedActor  {
-        FakeDTO dto;
+public class ExempleDAOActor extends UntypedActor  {
+        ExempleDTO dto;
 
         public void onReceive(Object message) {
      		if (message instanceof String){
             	
             	// call DAO
-            	FakeDAO dao = new FakeDAODefault();
+            	ExempleDAO dao = new ExempleDAODefault();
             	dto = dao.doit((String)message);
             	// tell DTO
             	getSender().tell(dto, getSelf());

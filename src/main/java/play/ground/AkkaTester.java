@@ -50,7 +50,7 @@ public class AkkaTester
 //		server.setHandler(contextHandler);
 
 
-		ServletContextHandler handler = new ServletContextHandler(server, "/yo");
+		ServletContextHandler handler = new ServletContextHandler(server, "/root");
 
 		
 		//Guice Filter

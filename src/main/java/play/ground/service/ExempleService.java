@@ -11,25 +11,22 @@ import org.slf4j.LoggerFactory;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
-import play.ground.dao.fake.FakeDAO;
-import play.ground.dao.fake.dto.FakeDTO;
+import play.ground.dao.exemple.ExempleDAO;
+import play.ground.dao.exemple.dto.ExempleDTO;
  
-public class YoService extends Service{
+public class ExempleService extends GenericService{
 
-	static final Logger log = LoggerFactory.getLogger(YoService.class);
+	static final Logger log = LoggerFactory.getLogger(ExempleService.class);
 	
 	HttpServletRequest req;
 	HttpServletResponse resp;
 
-	@Inject
-	@Named("fakedao.mode")
-	private String mode;
 
 	@Inject
-	private FakeDAO dao;
+	private ExempleDAO dao;
 	
 	@Inject
-	public YoService(){
+	private ExempleService(){
 		
 	}
 	
@@ -38,15 +35,14 @@ public class YoService extends Service{
 		this.req = req;
 		this.resp = resp;
 		String str = req.getParameter("str");
-		String strreq = "this is a test";
+		String strreq = "this is a test again";
 		if (str != null){
 			strreq = str;
 		}
 		try {
-			log.info("service mode: {}", mode);
 			this.resp.getWriter().println(this.toString());
 			//FakeDAO dao = this.daoProvider.get();
-			FakeDTO outdto = dao.doit(strreq);
+			ExempleDTO outdto = dao.doit(strreq);
 			this.resp.getWriter().println(outdto.src + " / " + outdto.compute);
 			
 		} catch (IOException e) {
