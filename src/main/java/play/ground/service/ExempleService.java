@@ -42,9 +42,13 @@ public class ExempleService extends GenericService{
 		try {
 			this.resp.getWriter().println(this.toString());
 			//FakeDAO dao = this.daoProvider.get();
-			ExempleDTO outdto = dao.doit(strreq);
-			this.resp.getWriter().println(outdto.src + " / " + outdto.compute);
-			
+			ExempleDTO outdto;
+			try {
+				outdto = dao.doit(strreq);
+				this.resp.getWriter().println(outdto.src + " / " + outdto.compute);
+			} catch (Exception e) {
+				log.error("DAO exploded for: {}",strreq, e);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
