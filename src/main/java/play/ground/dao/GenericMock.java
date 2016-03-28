@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 public abstract class GenericMock extends GenericDAO {
 
 	protected ObjectMapper mapper = new ObjectMapper();
-	protected final String STUB_KEY = "default";
+	public final static String STUB_KEY = "default";
 	
 	protected GenericDTO getFromJson(String functionnalPK, String dtoClassSimpleName) throws Exception{
 		ObjectMapper mapper = new ObjectMapper();

@@ -14,8 +14,8 @@ public class ApplicationServletModule extends ServletModule {
 		bind(ExempleServlet.class);
 		bind(IndexServlet.class);
 
-		serve("/exemple").with(ExempleServlet.class);
-		serve("/akka").with(AkkaServlet.class);
-		serve("/*").with(IndexServlet.class);
+		serve("/api/exemple").with(ExempleServlet.class);
+		serve("/api/akka").with(AkkaServlet.class);
+		serve("/api/*").with(IndexServlet.class);
 	}
 }

@@ -1,15 +1,15 @@
 package play.ground.injection;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Provides;
-import com.google.inject.name.Named;
+import com.google.inject.Binder;
+import com.google.inject.Module;
 
-import play.ground.service.ExempleService;
+import play.ground.service.rest.RestEasyService;
 
 
-public class ServiceModule extends AbstractModule {
+public class ServiceModule implements Module {
 
-    protected void configure() {
+    public void configure(final Binder binder) {
+    	 binder.bind(RestEasyService.class);
     }
     
 }

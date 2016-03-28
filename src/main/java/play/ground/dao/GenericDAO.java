@@ -45,7 +45,9 @@ public abstract class GenericDAO {
 						deser.remove(key);
 					}
 				}else{
+					// First entry is default one
 					deser = new HashMap<String, GenericDTO>();
+					deser.put(GenericMock.STUB_KEY, dto);
 				}
 				deser.put(key, dto);
 				

@@ -10,6 +10,9 @@ import javax.servlet.DispatcherType;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.servlet.ServletHolder;
+import org.jboss.resteasy.plugins.guice.GuiceResteasyBootstrapServletContextListener;
+import org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +23,7 @@ import com.google.inject.servlet.GuiceFilter;
 import play.ground.injection.ApplicationServletModule;
 import play.ground.injection.DAOModule;
 import play.ground.injection.ServiceModule;
+import play.ground.service.rest.RestEasyService;
 
 /**
  * Hello world!
@@ -51,11 +55,24 @@ public class AkkaTester
 
 
 		ServletContextHandler handler = new ServletContextHandler(server, "/root");
-
 		
-		//Guice Filter
-		handler.addFilter(GuiceFilter.class, "/*", EnumSet.allOf(DispatcherType.class));
+		// Conf RestEasy
+		
+		handler.addEventListener(injector.getInstance(GuiceResteasyBootstrapServletContextListener.class));
+		ServletHolder sh = new ServletHolder(HttpServletDispatcher.class);
+		// security filter
+		//handler.setInitParameter("resteasy.role.based.security", "true");
+		//handler.addFilter(new FilterHolder(injector.getInstance(HelloFilter.class)), "/*", null);
+		handler.addServlet(sh, "/rest/*");
+
+		// Conf Guice
+		
+		handler.addFilter(GuiceFilter.class, "/api/*", EnumSet.allOf(DispatcherType.class));
 		handler.addServlet(DefaultServlet.class, "/");
+		
+		
+		
+		//handler.addServlet(HttpServletDispatcher.class, "/rest/*");
 		
 		/* Replaced by GuiceModule */
 		

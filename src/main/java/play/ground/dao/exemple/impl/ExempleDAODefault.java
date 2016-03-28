@@ -22,15 +22,13 @@ public class ExempleDAODefault extends GenericDAO implements ExempleDAO {
 	
 		ExempleDTO dto = new ExempleDTO();
 		dto.src = data;
-		dto.compute = data.length();
-		try {
-			if (conf.hasPath("mock.fakedao.sleep")){ 
-				Thread.sleep(conf.getInt("mock.fakedao.sleep"));
-			}
-			
-		} catch (InterruptedException e) {
-			log.error("interrupted", e);
-		}
+		
+		// imagine un super appel externe
+		// qui renvoi len
+		int len = data.length();
+				
+		dto.compute = len;
+		
 		dump2json(data, dto);
 		
 		return dto;
