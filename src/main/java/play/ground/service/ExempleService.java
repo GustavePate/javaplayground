@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -25,11 +26,8 @@ public class ExempleService extends GenericService{
 	@Inject
 	private ExempleDAO dao;
 	
-	@Inject
-	private ExempleService(){
-		
-	}
-	
+
+	@Timed
 	public void doIt(HttpServletRequest req, HttpServletResponse resp){
 		start();
 		this.req = req;

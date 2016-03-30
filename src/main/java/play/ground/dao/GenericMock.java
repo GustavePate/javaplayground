@@ -12,15 +12,29 @@ public abstract class GenericMock extends GenericDAO {
 	protected ObjectMapper mapper = new ObjectMapper();
 	public final static String STUB_KEY = "default";
 	
-	protected GenericDTO getFromJson(String functionnalPK, String dtoClassSimpleName) throws Exception{
+	
+	protected GenericDTO getFromJson(String functionnalPK) throws Exception{
 		ObjectMapper mapper = new ObjectMapper();
 		GenericDTO res;
+		String daoName = getDAOInterfaceName();
+		
+		String mockDir = "";
+		if (conf.hasPath("mock.json.read.path")){
+			mockDir = conf.getString("mock.json.write.path");
+		}else{
+			mockDir = System.getProperty("java.io.tmpdir");
+		}
+		
+		File f = new File(mockDir, daoName+".json");
+		
 		mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
 		try {
 			
 			TypeFactory typeFactory = mapper.getTypeFactory();
 			MapType mapType = typeFactory.constructMapType(HashMap.class, String.class, GenericDTO.class);
-			HashMap<String, GenericDTO>deser = mapper.readValue(new File("/tmp/"+dtoClassSimpleName+".json"), mapType);
+			
+			
+			HashMap<String, GenericDTO>deser = mapper.readValue(f, mapType);
 			if (deser.containsKey(functionnalPK)){
 				res = deser.get(functionnalPK);
 			}else{
@@ -28,10 +42,10 @@ public abstract class GenericMock extends GenericDAO {
 			}
 			
 		} catch (Exception e) {
-			log.error("deserialize {}: ",dtoClassSimpleName, e);
+			log.error("deserialize {} from {}: ",daoName,f.getAbsolutePath());
 			throw e;
 		}
-		log.info("deserialize {}: ok",dtoClassSimpleName);
+		log.info("deserialize {} from {}: ok",daoName, f.getAbsolutePath());
 		return res;
 	}
 	

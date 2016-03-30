@@ -1,4 +1,4 @@
-package play.ground.servlet;
+package play.ground.servlet.metrics;
 
 import com.codahale.metrics.health.HealthCheckRegistry;
 import com.codahale.metrics.servlets.HealthCheckServlet;

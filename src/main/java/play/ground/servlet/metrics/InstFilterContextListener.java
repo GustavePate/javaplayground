@@ -1,18 +1,15 @@
-package play.ground.servlet;
+package play.ground.servlet.metrics;
 
 import com.codahale.metrics.MetricRegistry;
-import com.codahale.metrics.servlets.MetricsServlet;
+import com.codahale.metrics.servlet.InstrumentedFilterContextListener;
 import com.google.inject.Inject;
 
-public class MetricsServletContextListener extends MetricsServlet.ContextListener  {
-
+public class InstFilterContextListener extends InstrumentedFilterContextListener {
+    
 	@Inject
     public MetricRegistry METRIC_REGISTRY;
-
-    @Override
+	
     protected MetricRegistry getMetricRegistry() {
         return METRIC_REGISTRY;
     }
-	
-	
 }

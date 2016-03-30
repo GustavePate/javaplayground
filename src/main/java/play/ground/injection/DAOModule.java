@@ -36,11 +36,11 @@ public class DAOModule extends AbstractModule {
 		bind(Config.class).annotatedWith(Names.named("conf")).toInstance(conf);
 		
 		// Bind DAOs
-		if ("true".equalsIgnoreCase(props.getProperty("mock.fakedao", "false"))){
-			log.info("FakeDAO mode mock");
+		if ("true".equalsIgnoreCase(props.getProperty("mock.exempledao", "false")) || "true".equalsIgnoreCase(props.getProperty("mock.all.dao", "false")) ){
+			log.info("ExempleDAO mode mock");
 			bind(ExempleDAO.class).to(ExempleDAOMock.class);
 		}else{
-			log.info("FakeDAO mode regular");
+			log.info("ExempleDAO mode regular");
 			bind(ExempleDAO.class).to(ExempleDAODefault.class);
 		}
 	}

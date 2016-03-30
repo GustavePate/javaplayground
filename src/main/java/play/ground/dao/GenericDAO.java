@@ -25,6 +25,28 @@ public abstract class GenericDAO {
 
 	static final Logger log = LoggerFactory.getLogger(GenericDAO.class);
 	
+	protected String getDAOInterfaceName(){
+		
+		// get DAO Interface name
+		String realDaoInterfaceSimpleName = "randomDao";
+		Class<?>[] interfaceList = this.getClass().getInterfaces();
+		if (interfaceList.length > 1){
+			String candidate = "";
+			for (int i=0;i<interfaceList.length;i++){
+				candidate = interfaceList[i].getSimpleName();
+				if (candidate.endsWith("DAO") && (candidate!="GenericDAO")){
+					realDaoInterfaceSimpleName = candidate;
+					break;
+				}
+			}
+		}else if (interfaceList.length == 1) {
+			realDaoInterfaceSimpleName = this.getClass().getInterfaces()[0].getSimpleName();
+		}else{
+			log.error("Your DAO should implement an interface which ends with DAO, like this 'MyNameForThisDAO'");
+		}
+		return realDaoInterfaceSimpleName;
+	}
+
 	protected void dump2json(String key, GenericDTO dto) {
 		
 		if (conf.hasPath("dao.record.mode") && conf.getBoolean("dao.record.mode")){
@@ -34,9 +56,19 @@ public abstract class GenericDAO {
 		
 			TypeFactory typeFactory = mapper.getTypeFactory();
 			MapType mapType = typeFactory.constructMapType(HashMap.class, String.class, GenericDTO.class);
+			
+			String mockDir = "";
+			if (conf.hasPath("mock.json.write.path")){
+				mockDir = conf.getString("mock.json.write.path");
+			}else{
+				mockDir = System.getProperty("java.io.tmpdir");
+			}
+			
+			String daoName = getDAOInterfaceName();
+			File f = new File(mockDir, daoName + ".json");
 			try {
 				//First read file content
-				File f = new File("/tmp/" + dto.getClass().getSimpleName() + ".json");
+				
 				HashMap<String, GenericDTO>deser;
 				if (f.exists()){
 					deser = mapper.readValue(f, mapType);
@@ -56,7 +88,7 @@ public abstract class GenericDAO {
 			} catch (Exception e) {
 				log.error("Erreur de serialisation de {}", dto.getClass().getSimpleName(), e);
 			}
-			log.info("Serialisation de {}: ok", dto.getClass().getSimpleName());
+			log.info("Serialisation de {} dans {}: ok", dto.getClass().getSimpleName(), f.getAbsolutePath());
 		}
 		
 

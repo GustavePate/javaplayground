@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.EnumSet;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.DispatcherType;
 
@@ -19,8 +20,16 @@ import org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.codahale.metrics.ConsoleReporter;
 import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.Slf4jReporter;
+import com.codahale.metrics.servlet.InstrumentedFilter;
+import com.codahale.metrics.servlet.InstrumentedFilterContextListener;
 import com.codahale.metrics.servlets.AdminServlet;
+import com.codahale.metrics.servlets.HealthCheckServlet;
+import com.codahale.metrics.servlets.MetricsServlet;
+import com.codahale.metrics.servlets.PingServlet;
+import com.codahale.metrics.servlets.ThreadDumpServlet;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceFilter;
@@ -30,8 +39,8 @@ import play.ground.injection.DAOModule;
 import play.ground.injection.MetricsModule;
 import play.ground.injection.ServiceModule;
 import play.ground.service.rest.RestEasyService;
-import play.ground.servlet.HealthCheckServletContextListener;
-import play.ground.servlet.MetricsServletContextListener;
+import play.ground.servlet.metrics.HealthCheckServletContextListener;
+import play.ground.servlet.metrics.MetricsServletContextListener;
 
 /**
  * Hello world!
@@ -78,7 +87,19 @@ public class AkkaTester
         metricsContextHandler.addEventListener(injector.getInstance(MetricsServletContextListener.class));
         metricsContextHandler.addEventListener(injector.getInstance(HealthCheckServletContextListener.class));
         metricsContextHandler.addServlet(AdminServlet.class,"/admin");
-    	
+        metricsContextHandler.addServlet(MetricsServlet.class,"/admin/metrics");
+        metricsContextHandler.addServlet(PingServlet.class,"/admin/ping");
+        metricsContextHandler.addServlet(ThreadDumpServlet.class,"/admin/threads");
+        metricsContextHandler.addServlet(HealthCheckServlet.class,"/admin/healthcheck");
+        
+        final Slf4jReporter reporter = Slf4jReporter.forRegistry(injector.getInstance(MetricRegistry.class))
+                .outputTo(LoggerFactory.getLogger("play.ground.metrics"))
+                .convertRatesTo(TimeUnit.SECONDS)
+                .convertDurationsTo(TimeUnit.MILLISECONDS)
+                .build();
+        reporter.start(30, TimeUnit.SECONDS);	
+        
+        
     	
     	
     	
@@ -94,8 +115,9 @@ public class AkkaTester
 		handler.addServlet(sh, "/rest/*");
 
 		// Conf Guice
-		
+
 		handler.addFilter(GuiceFilter.class, "/api/*", EnumSet.allOf(DispatcherType.class));
+		handler.addFilter(InstrumentedFilter.class, "/*", EnumSet.allOf(DispatcherType.class));
 		handler.addServlet(DefaultServlet.class, "/");
 		
 		

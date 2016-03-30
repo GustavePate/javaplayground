@@ -1,13 +1,17 @@
 # En cours
 
-* Surcharge de l'injection sur les tests uniatires
-	* [http://stackoverflow.com/questions/483087/overriding-binding-in-guice](http://stackoverflow.com/questions/483087/overriding-binding-in-guice)
-* Utiliser les annotations metrics
-* AssertJ everywhere
-* Doc Mock
+* config stockage / lecture mock
 * ID Request à propager
+
+* AssertJ everywhere:
+* Doc Mock
+
 * Exemple Jenkins
 
+* Surcharge de l'injection sur les tests uniatires: ok a tester
+	* [http://stackoverflow.com/questions/483087/overriding-binding-in-guice](http://stackoverflow.com/questions/483087/overriding-binding-in-guice)
+   
+* Utiliser les annotations metrics: bof + marche pas avec RestEasy
 
 # TODO
 

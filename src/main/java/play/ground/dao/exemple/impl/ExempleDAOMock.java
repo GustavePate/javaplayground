@@ -25,7 +25,7 @@ public class ExempleDAOMock extends GenericMock implements ExempleDAO {
 		ExempleDTO dto = new ExempleDTO();
 		
 	
-			dto = (ExempleDTO) getFromJson(data, dto.getClass().getSimpleName());
+			dto = (ExempleDTO) getFromJson(data);
 		
 			if (conf.hasPath("mock.fakedao.sleep")){ 
 				Thread.sleep(conf.getInt("mock.fakedao.sleep"));

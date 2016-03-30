@@ -7,6 +7,9 @@ import java.util.concurrent.TimeoutException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.codahale.metrics.annotation.Counted;
+import com.google.inject.Inject;
+
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Inbox;
@@ -20,15 +23,17 @@ public class AkkaService extends GenericService {
 	HttpServletRequest req;
 	HttpServletResponse resp;
 
-	public AkkaService(HttpServletRequest req, HttpServletResponse resp){
+	@Inject
+	public AkkaService(){
 
-		this.req = req;
-		this.resp = resp;
 
 	}
 
-	public void doIt(){
+	@Counted
+	public void process(HttpServletRequest req, HttpServletResponse resp){
 		start();
+		this.req = req;
+		this.resp = resp;
 		try {
 			// recuperation du system
 			final ActorSystem system = AkkaWorld.getSystem();
