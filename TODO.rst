@@ -1,23 +1,26 @@
 # En cours
 
-* config stockage / lecture mock
-* ID Request à propager
-
-* AssertJ everywhere:
+* AssertJ everywhere
 * Doc Mock
-
 * Exemple Jenkins
-
 * Surcharge de l'injection sur les tests uniatires: ok a tester
 	* [http://stackoverflow.com/questions/483087/overriding-binding-in-guice](http://stackoverflow.com/questions/483087/overriding-binding-in-guice)
-   
-* Utiliser les annotations metrics: bof + marche pas avec RestEasy
 
 # TODO
 
+* Dump des métriques chez les système
+* Dump des métriques dans Kibana
+* Test de charge des métriques (tout doit arriver dans la resitution)
+* Documentation (forma md) pour tous les niveaux
+	* services
+	* dao
+	* unit test
+	* test composant
+	* test perf
+   * Jacoco: lancement depuis eclipse
+* Cucumber servlet
 * Découpages des DAO Thrift
 * Mockito
-* Cucumber servlet
 * H2 db pour les tests
 * Versioning des schémas de base de données
    * outil ?
@@ -41,17 +44,7 @@
       * mark change as valid
       * dump db  
    
-* Dump des métriques chez les système
-* Dump des métriques dans Kibana
 * Akka
-* Test de charge des métriques (tout doit arriver dans la resitution)
-* Documentation (forma md) pour tous les niveaux
-	* services
-	* dao
-	* unit test
-	* test composant
-	* test perf
-   * Jacoco: lancement depuis eclipse
 * Codelabs sur les tech utilisées (Junit / Mockito / Guice / Cucumber / Jackson)  
 * Minisite publiable / appli
 * Archetype Batch / Test des batchs
@@ -60,19 +53,27 @@
 * Hystrix
 
 
+# Mis de coté
+   
+* Utiliser les annotations metrics: bof + marche pas avec RestEasy
+* ID Request à propager
 
 # Done
 
-* Modèle de tests de charge
-* Arbo Junit / Cucumber avec Injection
-* conf accessible depuis les tests unit / composants
-* injection accessible depuis les tests unit / composants
-* world accessible depuis les tests unit / composants
-* Service != singleton
-* Metrics temps de réponse par défaut
-* Metrics nb error par défaut
-* Metriques agrégées évolutions des temps de réponse / nb appels
-* resitution graphique des métriques
-* Jacoco junit
-* Jacoco cucumber
-* info-build.json
+* DAO: Refactoring structure des DAO (nommage)
+* DAO: ne sont plus des singletons (métriques)
+* DAO: Record / Playback des données renvoyées par les DAO
+* TEST: Modèle de tests de charge
+* TEST: Arbo Junit / Cucumber avec Injection
+* TEST: conf accessible depuis les tests unit / composants
+* TEST: injection accessible depuis les tests unit / composants
+* TEST: world accessible depuis les tests unit / composants
+* TEST: Jacoco junit
+* TEST: Jacoco cucumber
+* TEST: info-build.json (pour savoir quand c'est deployé)
+* SERVICES: Service != singleton (pour métriques)
+* METRIQUES: Metrics temps de réponse par défaut
+* METRIQUES: Metrics nb error par défaut
+* METRIQUES: Metriques agrégées évolutions des temps de réponse / nb appels
+* METRIQUES: Detail du temps de réponse de chaque DAO pour chaque appel
+* METRIQUES: resitution graphique des métriques
