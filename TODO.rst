@@ -2,9 +2,10 @@
 
 * AssertJ everywhere
 * Doc Mock
-* Exemple Jenkins
 * Surcharge de l'injection sur les tests uniatires: ok a tester
 	* [http://stackoverflow.com/questions/483087/overriding-binding-in-guice](http://stackoverflow.com/questions/483087/overriding-binding-in-guice)
+* Découpages des DAO Thrift
+* Découpages des DAO BDD
 
 # TODO
 
@@ -19,8 +20,8 @@
 	* test perf
    * Jacoco: lancement depuis eclipse
 * Cucumber servlet
-* Découpages des DAO Thrift
-* Mockito
+* Exemple Jenkins
+* Codelabs sur les tech utilisées (Junit + Guice + Cucumber + Jackson)  
 * H2 db pour les tests
 * Versioning des schémas de base de données
    * outil ?
@@ -44,18 +45,18 @@
       * mark change as valid
       * dump db  
    
+* Hystrix
+* Mockito
 * Akka
-* Codelabs sur les tech utilisées (Junit / Mockito / Guice / Cucumber / Jackson)  
 * Minisite publiable / appli
 * Archetype Batch / Test des batchs
 * Junit Scope (ignorer certains tests)
 * Injection de module par annotation (Jukito / GuiceBerry)
-* Hystrix
 
 
 # Mis de coté
    
-* Utiliser les annotations metrics: bof + marche pas avec RestEasy
+* Utiliser les annotations metrics: plus value bof + marche pas avec RestEasy
 * ID Request à propager
 
 # Done
