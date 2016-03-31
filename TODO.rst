@@ -15,6 +15,7 @@
 * Documentation (forma md) pour tous les niveaux
 	* services
 	* dao
+   * Metriques
 	* unit test
 	* test composant
 	* test perf

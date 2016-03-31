@@ -33,6 +33,8 @@ import com.codahale.metrics.servlets.ThreadDumpServlet;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceFilter;
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
 
 import play.ground.injection.ApplicationServletModule;
 import play.ground.injection.DAOModule;
@@ -52,6 +54,15 @@ public class AkkaTester
 
     public static void main( String[] args )
     {
+    
+    	
+		Config conf = ConfigFactory.load("application");
+		if (conf.getString("app.env").equalsIgnoreCase("DEV")){
+			for (int i=0;i<=5;i++){
+				log.info(conf.getString("dev.env.banner" + String.valueOf(i)));
+			}
+		}
+    	
     	
     	DAOModule daoModule = new DAOModule();
     	ServiceModule serviceModule = new ServiceModule();
