@@ -14,40 +14,41 @@ public abstract class AbstractMock extends AbstractDAO {
 	
 	
 	protected MockableDTO getFromJson(String functionnalPK) throws Exception{
+
 		ObjectMapper mapper = new ObjectMapper();
 		MockableDTO res;
 		String daoName = getDAOInterfaceName();
-		
+
 		String mockDir = "";
-		if (conf.hasPath("mock.json.read.path")){
+		if (conf.hasPath("mock.json.read.path")) {
 			mockDir = conf.getString("mock.json.write.path");
-		}else{
+		} else {
 			mockDir = System.getProperty("java.io.tmpdir");
 		}
-		
-		File f = new File(mockDir, daoName+".json");
-		
+
+		File f = new File(mockDir, daoName + ".json");
+
 		mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
 		try {
-			
+
 			TypeFactory typeFactory = mapper.getTypeFactory();
 			MapType mapType = typeFactory.constructMapType(HashMap.class, String.class, MockableDTO.class);
 			
 			
 			HashMap<String, MockableDTO>deser = mapper.readValue(f, mapType);
-			if (deser.containsKey(functionnalPK)){
+
+			if (deser.containsKey(functionnalPK)) {
 				res = deser.get(functionnalPK);
-			}else{
+			} else {
 				res = deser.get("default");
 			}
-			
+
 		} catch (Exception e) {
-			log.error("deserialize {} from {}: ",daoName,f.getAbsolutePath());
+			log.error("deserialize {} from {}: ", daoName, f.getAbsolutePath());
 			throw e;
 		}
-		log.info("deserialize {} from {}: ok",daoName, f.getAbsolutePath());
+		log.info("deserialize {} from {}: ok", daoName, f.getAbsolutePath());
 		return res;
 	}
-	
-	
+
 }
