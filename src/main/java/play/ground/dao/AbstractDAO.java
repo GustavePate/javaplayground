@@ -17,13 +17,13 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import com.typesafe.config.Config;
 
-public abstract class GenericDAO {
+public abstract class AbstractDAO {
 
 	@Inject
 	@Named("conf")
 	protected Config conf;
 
-	static final Logger log = LoggerFactory.getLogger(GenericDAO.class);
+	static final Logger log = LoggerFactory.getLogger(AbstractDAO.class);
 	
 	protected String getDAOInterfaceName(){
 		
@@ -47,7 +47,7 @@ public abstract class GenericDAO {
 		return realDaoInterfaceSimpleName;
 	}
 
-	protected void dump2json(String key, GenericDTO dto) {
+	protected void dump2json(String key, MockableDTO dto) {
 		
 		if (conf.hasPath("dao.record.mode") && conf.getBoolean("dao.record.mode")){
 			ObjectMapper mapper = new ObjectMapper();
@@ -55,7 +55,7 @@ public abstract class GenericDAO {
 			mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 		
 			TypeFactory typeFactory = mapper.getTypeFactory();
-			MapType mapType = typeFactory.constructMapType(HashMap.class, String.class, GenericDTO.class);
+			MapType mapType = typeFactory.constructMapType(HashMap.class, String.class, MockableDTO.class);
 			
 			String mockDir = "";
 			if (conf.hasPath("mock.json.write.path")){
@@ -69,7 +69,7 @@ public abstract class GenericDAO {
 			try {
 				//First read file content
 				
-				HashMap<String, GenericDTO>deser;
+				HashMap<String, MockableDTO>deser;
 				if (f.exists()){
 					deser = mapper.readValue(f, mapType);
 					// replace eventual existing key
@@ -78,8 +78,8 @@ public abstract class GenericDAO {
 					}
 				}else{
 					// First entry is default one
-					deser = new HashMap<String, GenericDTO>();
-					deser.put(GenericMock.STUB_KEY, dto);
+					deser = new HashMap<String, MockableDTO>();
+					deser.put(AbstractMock.STUB_KEY, dto);
 				}
 				deser.put(key, dto);
 				

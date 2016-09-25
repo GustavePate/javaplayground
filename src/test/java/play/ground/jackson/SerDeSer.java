@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 
 import static org.assertj.core.api.Assertions.*;
 
-import play.ground.dao.GenericDTO;
+import play.ground.dao.MockableDTO;
 import play.ground.dao.simple.dto.SimpleDTOOut;
 
 
@@ -127,7 +127,7 @@ public class SerDeSer {
 	@Test
 	public void deserialize_simple_abstract() throws Exception{
 		
-		GenericDTO gdto = dto;
+		MockableDTO gdto = dto;
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
 		
@@ -147,7 +147,7 @@ public class SerDeSer {
 		mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
 		//mapper.enableDefaultTyping();
 		try {
-			GenericDTO deser = mapper.readValue(new File("/tmp/SimpleAbstractObject.json"), GenericDTO.class);
+			MockableDTO deser = mapper.readValue(new File("/tmp/SimpleAbstractObject.json"), MockableDTO.class);
 			
 			SimpleDTOOut specificdto = (SimpleDTOOut) deser;
 			assertThat(specificdto.name).isEqualTo("simple_abstract");
@@ -187,8 +187,8 @@ public class SerDeSer {
 		try {
 			
 			TypeFactory typeFactory = mapper.getTypeFactory();
-			MapType mapType = typeFactory.constructMapType(HashMap.class, String.class, GenericDTO.class);
-			HashMap<String, GenericDTO>deser = mapper.readValue(new File("/tmp/ListAbstractObject.json"), mapType);
+			MapType mapType = typeFactory.constructMapType(HashMap.class, String.class, MockableDTO.class);
+			HashMap<String, MockableDTO>deser = mapper.readValue(new File("/tmp/ListAbstractObject.json"), mapType);
 			assertThat(deser.size()).isEqualTo(4);
 			SimpleDTOOut specificdto = (SimpleDTOOut) deser.get("default");
 			
@@ -211,7 +211,7 @@ public class SerDeSer {
 		mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
 		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 		
-		HashMap<String, GenericDTO> abs_dtomap = new HashMap<String, GenericDTO>();
+		HashMap<String, MockableDTO> abs_dtomap = new HashMap<String, MockableDTO>();
 		
 		dtomap.forEach((k,v)-> {
 			abs_dtomap.put(k,  v);
@@ -235,8 +235,8 @@ public class SerDeSer {
 		try {
 			
 			TypeFactory typeFactory = mapper.getTypeFactory();
-			MapType mapType = typeFactory.constructMapType(HashMap.class, String.class, GenericDTO.class);
-			HashMap<String, GenericDTO>deser = mapper.readValue(new File("/tmp/ListFullAbstractObject.json"), mapType);
+			MapType mapType = typeFactory.constructMapType(HashMap.class, String.class, MockableDTO.class);
+			HashMap<String, MockableDTO>deser = mapper.readValue(new File("/tmp/ListFullAbstractObject.json"), mapType);
 			assertThat(deser.size()).isEqualTo(4);
 			SimpleDTOOut specificdto = (SimpleDTOOut) deser.get("default");
 			

@@ -1,8 +1,8 @@
 package play.ground.dao.exemple.dto;
 
-import play.ground.dao.GenericDTO;
+import play.ground.dao.MockableDTO;
 
-public class ExempleDTO extends GenericDTO {
+public class ExempleDTO extends MockableDTO {
 
 	public int compute = 0;
 	public String src = "";

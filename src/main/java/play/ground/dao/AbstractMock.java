@@ -7,15 +7,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
-public abstract class GenericMock extends GenericDAO {
+public abstract class AbstractMock extends AbstractDAO {
 
 	protected ObjectMapper mapper = new ObjectMapper();
 	public final static String STUB_KEY = "default";
 	
 	
-	protected GenericDTO getFromJson(String functionnalPK) throws Exception{
+	protected MockableDTO getFromJson(String functionnalPK) throws Exception{
 		ObjectMapper mapper = new ObjectMapper();
-		GenericDTO res;
+		MockableDTO res;
 		String daoName = getDAOInterfaceName();
 		
 		String mockDir = "";
@@ -31,10 +31,10 @@ public abstract class GenericMock extends GenericDAO {
 		try {
 			
 			TypeFactory typeFactory = mapper.getTypeFactory();
-			MapType mapType = typeFactory.constructMapType(HashMap.class, String.class, GenericDTO.class);
+			MapType mapType = typeFactory.constructMapType(HashMap.class, String.class, MockableDTO.class);
 			
 			
-			HashMap<String, GenericDTO>deser = mapper.readValue(f, mapType);
+			HashMap<String, MockableDTO>deser = mapper.readValue(f, mapType);
 			if (deser.containsKey(functionnalPK)){
 				res = deser.get(functionnalPK);
 			}else{

@@ -1,8 +1,8 @@
 package play.ground.dao.simple.dto;
 
-import play.ground.dao.GenericDTO;
+import play.ground.dao.MockableDTO;
 
-public class SimpleDTOOut extends GenericDTO {
+public class SimpleDTOOut extends MockableDTO {
 
 	public String id;
 	public String name;

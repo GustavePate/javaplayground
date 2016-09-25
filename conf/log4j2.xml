@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN">
+<Configuration status="WARN" packages="play.ground.log4j2.appender">
   <Appenders>
 	<Console name="Console" target="SYSTEM_OUT">
 	  <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
 	</Console>
+	<KibanaAppender name="Kibana" host="localhost" port="2929">
+       <JSONLayout complete="false"/>
+    </KibanaAppender>
   </Appenders>
+  
   <Loggers>
 	<!-- Deactivate Metrics logs --> 
 	<Logger name="play.ground.metrics" additivity="false" level="error">
       <AppenderRef ref="Console"/>
+    </Logger>
+    <Logger name="play.ground.log4j2.unit" additivity="false" level="trace">
+      <AppenderRef ref="Kibana"/>
     </Logger>
     <!-- Consume logs for play.ground -->
     <Logger name="play.ground" additivity="false" level="debug">

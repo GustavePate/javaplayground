@@ -12,11 +12,11 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
-import play.ground.dao.GenericMock;
+import play.ground.dao.AbstractMock;
 import play.ground.dao.exemple.ExempleDAO;
 import play.ground.dao.exemple.dto.ExempleDTO;
 
-public class ExempleDAOMock extends GenericMock implements ExempleDAO {
+public class ExempleDAOMock extends AbstractMock implements ExempleDAO {
 
 	static final Logger log = LoggerFactory.getLogger(ExempleDAOMock.class);
 
