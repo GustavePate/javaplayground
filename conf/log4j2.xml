@@ -7,6 +7,9 @@
 	<KibanaAppender name="Kibana" host="localhost" port="2929">
        <JSONLayout complete="false"/>
     </KibanaAppender>
+    <Socket name="Socket" host="localhost" port="2930">
+       <JSONLayout complete="false" compact="true" properties="true" eventEol="true"/>
+    </Socket>
   </Appenders>
   
   <Loggers>
@@ -16,6 +19,9 @@
     </Logger>
     <Logger name="play.ground.log4j2.unit" additivity="false" level="trace">
       <AppenderRef ref="Kibana"/>
+    </Logger>
+    <Logger name="play.ground.log4j2.unit.SocketAppenderTest" additivity="false" level="trace">
+      <AppenderRef ref="Socket"/>
     </Logger>
     <!-- Consume logs for play.ground -->
     <Logger name="play.ground" additivity="false" level="debug">
