@@ -21,7 +21,7 @@ public class DAOModule extends AbstractModule {
 	
 	protected void configure() {		
 		
-		//makes properties availabale via @Inject @Named("property.name")
+		//makes properties available via @Inject @Named("property.name")
 		Properties props = null;
 		try {
 			props = loadProperties();

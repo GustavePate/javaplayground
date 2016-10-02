@@ -1,36 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN" packages="play.ground.log4j2.appender">
-  <Appenders>
-	<Console name="Console" target="SYSTEM_OUT">
-	  <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
-	</Console>
-	<KibanaAppender name="Kibana" host="localhost" port="2929">
-       <JSONLayout complete="false"/>
-    </KibanaAppender>
-    <Socket name="Socket" host="localhost" port="2930">
-       <JSONLayout complete="false" compact="true" properties="true" eventEol="true"/>
-    </Socket>
-  </Appenders>
-  
-  <Loggers>
-	<!-- Deactivate Metrics logs --> 
-	<Logger name="play.ground.metrics" additivity="false" level="error">
-      <AppenderRef ref="Console"/>
-    </Logger>
-    <Logger name="play.ground.log4j2.unit" additivity="false" level="trace">
-      <AppenderRef ref="Kibana"/>
-    </Logger>
-    <Logger name="play.ground.log4j2.unit.SocketAppenderTest" additivity="false" level="trace">
-      <AppenderRef ref="Socket"/>
-    </Logger>
-    <!-- Consume logs for play.ground -->
-    <Logger name="play.ground" additivity="false" level="debug">
-      <AppenderRef ref="Console"/>
-    </Logger>
-	<Root level="info">
-	  <AppenderRef ref="Console"/>
-	</Root>
-    
-    
-  </Loggers>
+
+	<Properties>
+		<Property name="application.name">play.ground</Property>
+	</Properties>
+
+
+	<Appenders>
+
+		<RollingFile name="Main" fileName="logs/${application.name}.log"
+			filePattern="logs/$${date:yyyy-MM}/${application.name}-%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout>
+				<Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+			</PatternLayout>
+			<!-- When to rotate -->
+			<Policies>
+				<!-- on application startup -->
+				<OnStartupTriggeringPolicy />
+				<!-- when log is too big -->
+				<SizeBasedTriggeringPolicy size="250 MB" />
+				<!-- every day at 0:00 -->
+				<CronBasedTriggeringPolicy schedule="0 0 0 * * * *"
+					evaluateOnStartup="false" />
+			</Policies>
+
+			<DefaultRolloverStrategy max="40" />
+		</RollingFile>
+
+
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+
+		<KibanaAppender name="Kibana2" host="localhost" port="2929">
+			<JSONLayout complete="false" />
+		</KibanaAppender>
+
+		<Socket name="LogstashSocket" host="localhost" port="2929"
+			protocol="TCP" reconnectionDelayMillis="2000" ignoreExceptions="false">
+			<JSONLayout complete="false" compact="true" properties="true"
+				eventEol="true" />
+		</Socket>
+		<Failover name="Kibana" primary="LogstashSocket" retryIntervalSeconds="5">
+			<Failovers>
+				<AppenderRef ref="Console" />
+			</Failovers>
+		</Failover>
+	</Appenders>
+
+	<Loggers>
+		<!-- Deactivate Metrics logs -->
+		<Logger name="play.ground.metrics" additivity="false" level="error">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="play.ground.log4j2.unit" additivity="false"
+			level="trace">
+			<AppenderRef ref="Kibana" />
+		</Logger>
+		<Logger name="play.ground.log4j2.SocketAppenderTest"
+			additivity="false" level="trace">
+			<AppenderRef ref="Kibana" />
+		</Logger>
+		<!-- Consume logs for play.ground -->
+		<Logger name="play.ground" additivity="false" level="debug">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Root level="info">
+			<AppenderRef ref="Console" />
+		</Root>
+
+
+	</Loggers>
 </Configuration>

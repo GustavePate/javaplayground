@@ -1,14 +1,13 @@
-package play.ground.log4j2.unit;
+package play.ground.log4j2;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.MDC;
 
-public class SocketAppenderTest {
+public class KibanaAppenderTest {
 
 	
-	static final Logger LOG = LoggerFactory.getLogger(SocketAppenderTest.class);
+	static final Logger LOG = LoggerFactory.getLogger(KibanaAppenderTest.class);
 	
 	/*
 	 * You will need to:
@@ -19,9 +18,6 @@ public class SocketAppenderTest {
 	
 	@Test
 	public void run_netcat(){
-		
-		MDC.put("kibanaidentity", "test");
-		
 		LOG.info("yo");
 		
 		Exception ex = new Exception("my error message");
