@@ -38,7 +38,7 @@
 
 		<Socket name="LogstashSocket" host="localhost" port="2929"
 			protocol="TCP" reconnectionDelayMillis="2000" ignoreExceptions="false">
-			<JSONLayout complete="false" compact="true" properties="true"
+			<KibanaJsonLayout complete="false" compact="true" properties="true"
 				eventEol="true" />
 		</Socket>
 		<Failover name="Kibana" primary="LogstashSocket" retryIntervalSeconds="5">

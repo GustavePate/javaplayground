@@ -13,6 +13,14 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	
+	<repositories>
+		<repository>  
+			<id>maven-restlet</id>  
+			<name>Public online Restlet repository</name>  
+			<url>http://maven.restlet.org</url>  
+		</repository>  
+	</repositories>
 
 	<dependencies>
 
@@ -200,6 +208,11 @@
 			<version>3.1.2</version>
 		</dependency>
 
+<dependency>
+    <groupId>org.jminix</groupId>
+    <artifactId>jminix</artifactId>
+    <version>1.2.0</version>
+</dependency>
 
 
 	</dependencies>
