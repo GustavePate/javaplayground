@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 
 import static org.assertj.core.api.Assertions.*;
 
-import play.ground.dao.MockableDTO;
+import play.ground.core.dao.mock.MockableDTO;
 import play.ground.dao.simple.dto.SimpleDTOOut;
 
 

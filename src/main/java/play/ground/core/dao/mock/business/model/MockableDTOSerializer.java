@@ -1,6 +1,6 @@
-package play.ground.dao.meta;
+package play.ground.core.dao.mock.business.model;
 
-import play.ground.dao.MockableDTO;
+import play.ground.core.dao.mock.MockableDTO;
 
 public class MockableDTOSerializer {
 	
@@ -13,6 +13,10 @@ public class MockableDTOSerializer {
 		resp = zeresp;
 	}
 	
+	public MockableDTOSerializer() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Object getResp(){
 		return resp;
 	}

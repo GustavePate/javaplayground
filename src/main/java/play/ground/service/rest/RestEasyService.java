@@ -10,7 +10,6 @@ import javax.ws.rs.Produces;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.codahale.metrics.annotation.Counted;
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
 

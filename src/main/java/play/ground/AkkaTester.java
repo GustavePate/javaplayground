@@ -20,11 +20,9 @@ import org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.codahale.metrics.ConsoleReporter;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Slf4jReporter;
 import com.codahale.metrics.servlet.InstrumentedFilter;
-import com.codahale.metrics.servlet.InstrumentedFilterContextListener;
 import com.codahale.metrics.servlets.AdminServlet;
 import com.codahale.metrics.servlets.HealthCheckServlet;
 import com.codahale.metrics.servlets.MetricsServlet;
@@ -40,7 +38,6 @@ import play.ground.injection.ApplicationServletModule;
 import play.ground.injection.DAOModule;
 import play.ground.injection.MetricsModule;
 import play.ground.injection.ServiceModule;
-import play.ground.service.rest.RestEasyService;
 import play.ground.servlet.metrics.HealthCheckServletContextListener;
 import play.ground.servlet.metrics.MetricsServletContextListener;
 

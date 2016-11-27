@@ -1,37 +1,29 @@
-package play.ground.dao.exemple.impl;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
+package play.ground.dao.exemple.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.type.MapType;
-import com.fasterxml.jackson.databind.type.TypeFactory;
-
-import play.ground.dao.AbstractMock;
+import play.ground.core.dao.mock.AbstractMock;
 import play.ground.dao.exemple.ExempleDAO;
 import play.ground.dao.exemple.dto.ExempleDTO;
 
 public class ExempleDAOMock extends AbstractMock implements ExempleDAO {
 
-	static final Logger log = LoggerFactory.getLogger(ExempleDAOMock.class);
+    static final Logger log = LoggerFactory.getLogger(ExempleDAOMock.class);
 
-	public ExempleDTO doit(String data) throws Exception {
+    public ExempleDTO doit(String data) throws Exception {
 
-		ExempleDTO dto = new ExempleDTO();
+        ExempleDTO dto = new ExempleDTO();
 
-		dto = (ExempleDTO) getFromJson(data);
+        // dto = (ExempleDTO) getFromJson(data);
 
-		if (conf.hasPath("mock.exempledao.sleep")) {
-			Thread.sleep(conf.getInt("mock.exempledao.sleep"));
-		}
+        if (props.contains("mock.exempledao.sleep")) {
+            Thread.sleep((int) props.get("mock.exempledao.sleep"));
+        }
 
-		return dto;
+        return dto;
 
-	}
+    }
 
 }

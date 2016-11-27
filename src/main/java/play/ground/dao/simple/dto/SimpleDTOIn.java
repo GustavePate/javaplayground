@@ -1,14 +1,14 @@
+
 package play.ground.dao.simple.dto;
 
+import play.ground.core.dao.mock.MockableDTO;
 
-import play.ground.dao.MockableDTO;
+public class SimpleDTOIn implements MockableDTO {
 
-public class SimpleDTOIn extends MockableDTO {
+    public String id = "123456";
 
-	public String id = "123456";
-
-	public String functionnalPK() {
-		return id;
-	}
+    public String functionnalPK() {
+        return id;
+    }
 
 }

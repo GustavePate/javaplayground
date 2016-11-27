@@ -7,8 +7,6 @@ import org.slf4j.LoggerFactory;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
-
 import static org.assertj.core.api.Assertions.*;
 
 import java.io.BufferedReader;

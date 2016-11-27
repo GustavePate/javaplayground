@@ -1,16 +1,8 @@
 package play.ground.log4j2.appender;
 import java.io.Serializable;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
-
 import org.apache.logging.log4j.core.Filter;
 import org.apache.logging.log4j.core.Layout;
-import org.apache.logging.log4j.core.LogEvent;
-import org.apache.logging.log4j.core.appender.OutputStreamAppender;
-import org.apache.logging.log4j.core.appender.OutputStreamManager;
 import org.apache.logging.log4j.core.appender.AbstractOutputStreamAppender;
-import org.apache.logging.log4j.core.appender.AppenderLoggingException;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
 import org.apache.logging.log4j.core.config.plugins.PluginAttribute;
 import org.apache.logging.log4j.core.config.plugins.PluginElement;

@@ -13,10 +13,9 @@ import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
 import play.ground.annotation.mockable.object.YoupiDAO;
-import play.ground.dao.meta.JSONMockManager;
-import play.ground.dao.meta.Mockable;
-import play.ground.dao.meta.MockableDAO;
-import play.ground.log4j2.KibanaAppenderTest;
+import play.ground.core.dao.mock.Mockable;
+import play.ground.core.dao.mock.annotation.MockableInterceptor;
+import play.ground.core.dao.mock.business.JSONMockManager;
 
 public class MockableTest {
 
@@ -32,9 +31,9 @@ public class MockableTest {
 				
 				requestStaticInjection(JSONMockManager.class);
 			  
-			    MockableDAO mockableDAO = new MockableDAO();
-			    requestInjection(mockableDAO);
-			    bindInterceptor(Matchers.any(), Matchers.annotatedWith(Mockable.class), mockableDAO);
+			    MockableInterceptor mockableInter = new MockableInterceptor();
+			    requestInjection(mockableInter);
+			    bindInterceptor(Matchers.any(), Matchers.annotatedWith(Mockable.class), mockableInter);
 		  }
 	}
 	

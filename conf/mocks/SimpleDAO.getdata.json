@@ -1,0 +1,25 @@
+[ {
+  "defaultvalue" : false,
+  "responseCanonicalName" : "play.ground.core.dao.mock.simpledao.dto.SimpleDTO",
+  "request" : [ "ia" ],
+  "response" : {
+    "key" : null,
+    "value" : "2"
+  }
+}, {
+  "defaultvalue" : false,
+  "responseCanonicalName" : "play.ground.core.dao.mock.simpledao.dto.SimpleDTO",
+  "request" : [ "sleep_please" ],
+  "response" : {
+    "key" : null,
+    "value" : "4"
+  }
+}, {
+  "defaultvalue" : true,
+  "responseCanonicalName" : "play.ground.core.dao.mock.simpledao.dto.SimpleDTO",
+  "request" : [ "ia" ],
+  "response" : {
+    "key" : null,
+    "value" : "29"
+  }
+} ]

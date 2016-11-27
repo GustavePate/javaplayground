@@ -4,9 +4,6 @@ import com.google.inject.servlet.ServletModule;
 
 import play.ground.servlet.AkkaServlet;
 import play.ground.servlet.IndexServlet;
-import play.ground.servlet.metrics.HealthCheckServletContextListener;
-import play.ground.servlet.metrics.InstFilterContextListener;
-import play.ground.servlet.metrics.MetricsServletContextListener;
 import play.ground.servlet.ExempleServlet;
 	
 public class ApplicationServletModule extends ServletModule {

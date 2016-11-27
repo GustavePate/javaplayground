@@ -31,7 +31,7 @@
 		<Console name="Console" target="SYSTEM_OUT">
 			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
 		</Console>
-
+		<!-- 
 		<KibanaAppender name="Kibana2" host="localhost" port="2929">
 			<JSONLayout complete="false" />
 		</KibanaAppender>
@@ -46,6 +46,7 @@
 				<AppenderRef ref="Console" />
 			</Failovers>
 		</Failover>
+		 -->
 	</Appenders>
 
 	<Loggers>
@@ -57,10 +58,12 @@
 			level="trace">
 			<AppenderRef ref="Kibana" />
 		</Logger>
+		<!-- 
 		<Logger name="play.ground.log4j2.SocketAppenderTest"
 			additivity="false" level="trace">
 			<AppenderRef ref="Kibana" />
 		</Logger>
+		 -->
 		<!-- Consume logs for play.ground -->
 		<Logger name="play.ground" additivity="false" level="debug">
 			<AppenderRef ref="Console" />

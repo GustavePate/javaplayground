@@ -10,8 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
-
 import play.ground.dao.exemple.ExempleDAO;
 import play.ground.dao.exemple.dto.ExempleDTO;
  

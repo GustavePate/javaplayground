@@ -1,0 +1,34 @@
+[ {
+  "defaultvalue" : true,
+  "responseCanonicalName" : "play.ground.core.dao.mock.complexdao.dto.ComplexDTOOut",
+  "request" : [ {
+    "indata" : "specific"
+  }, {
+    "indata" : "value"
+  }, true ],
+  "response" : {
+    "outdata" : "default value"
+  }
+}, {
+  "defaultvalue" : false,
+  "responseCanonicalName" : "play.ground.core.dao.mock.complexdao.dto.ComplexDTOOut",
+  "request" : [ {
+    "indata" : "specific"
+  }, {
+    "indata" : "value"
+  }, true ],
+  "response" : {
+    "outdata" : "default value"
+  }
+}, {
+  "defaultvalue" : false,
+  "responseCanonicalName" : "play.ground.core.dao.mock.complexdao.dto.ComplexDTOOut",
+  "request" : [ {
+    "indata" : "specific"
+  }, {
+    "indata" : "value"
+  }, true ],
+  "response" : {
+    "outdata" : "specific value"
+  }
+} ]
