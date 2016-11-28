@@ -74,18 +74,16 @@ public class JSONSupaMockManager {
     // locks
     protected static ConcurrentHashMap<String, ReadWriteLock> locks = new ConcurrentHashMap<>();
 
-   
     // 4 tests
-    public static ConcurrentHashMap<String, HashMap<String, MockableDTOSupaSerializer>> test_getRawData(){
-    	return objArraySerializers;
+    public static ConcurrentHashMap<String, HashMap<String, MockableDTOSupaSerializer>> test_getRawData() {
+        return objArraySerializers;
     }
-    
+
     // 4 tests
-    public static Properties test_getConf(){
-    	return conf;
+    public static Properties test_getConf() {
+        return conf;
     }
-    
-    
+
     // pour les tests
     public static void test_dropData() {
         locks = new ConcurrentHashMap<>();
@@ -97,14 +95,11 @@ public class JSONSupaMockManager {
     public static <Q> String getHash(final Q query) throws JsonProcessingException {
         // get query hash
         final String jsonQuery = mapper.writeValueAsString(query);
-        //LOG.debug("TODO GP: json base for hash: **{}**", jsonQuery);
+        // LOG.debug("TODO GP: json base for hash: **{}**", jsonQuery);
         final String hash = Md5Crypt.apr1Crypt(jsonQuery, DAO_SALT).split("\\$")[3];
-        //LOG.debug("TODO GP: hash is **{}**", hash);
+        // LOG.debug("TODO GP: hash is **{}**", hash);
         return hash;
     }
-    
-    
-
 
     /*
      * Récuperation de l'inputStream de LECTURE des mocks
@@ -112,26 +107,26 @@ public class JSONSupaMockManager {
     private static InputStream getMockInputStream(final String mockId) {
 
         InputStream in = null;
-        
+
         try {
             if (conf.containsKey("mock.json.read.path")) {
-            	final Path mockPath = Paths.get(conf.getProperty("mock.json.read.path"), mockId + ".json");
+                final Path mockPath = Paths.get(conf.getProperty("mock.json.read.path"), mockId + ".json");
                 LOG.warn("Lecture du json des mocks depuis {}", mockPath.getFileName().toAbsolutePath().toString());
-                if (mockPath.toFile().exists()){
-                	in = new FileInputStream(mockPath.toFile());
-                }else{
-                	LOG.error("Impossible de lire le json des mocks dans le fichier {}", mockPath.getFileName().toAbsolutePath());
+                if (mockPath.toFile().exists()) {
+                    in = new FileInputStream(mockPath.toFile());
+                } else {
+                    LOG.error("Impossible de lire le json des mocks dans le fichier {}", mockPath.getFileName().toAbsolutePath());
                 }
             } else {
                 // Mode nominal on va chercher ça dans le classpath
                 LOG.warn("Lecture du json des mocks depuis le classpath {}", mockId + ".json");
                 in = JSONSupaMockManager.class.getClassLoader().getResourceAsStream(mockId + ".json");
-                if (in == null){
-                	LOG.error("Impossible de lire le json des mocks depuis le classpath {}", mockId + ".json");
+                if (in == null) {
+                    LOG.error("Impossible de lire le json des mocks depuis le classpath {}", mockId + ".json");
                 }
             }
         } catch (final FileNotFoundException e) {
-                	LOG.error("Impossible de trouver le json des mocks: {}", mockId + ".json");
+            LOG.error("Impossible de trouver le json des mocks: {}", mockId + ".json");
         }
         return in;
     }
@@ -217,40 +212,38 @@ public class JSONSupaMockManager {
             final TypeReference<List<MockableDTOSupaSerializer>> typeRef = new TypeReference<List<MockableDTOSupaSerializer>>() {
             };
             deser = mapper.readValue(in, typeRef);
-            
+
         } catch (final Exception e) {
             throw new DAOException(e);
         }
-        
-        
-        //TODO GP: recalculate hash and put in a 
+
+        // TODO GP: recalculate hash and put in a
         HashMap<String, MockableDTOSupaSerializer> res = new HashMap<>();
-        
-        
-        int cpt=0;
+
+        int cpt = 0;
         String hash = "";
-        for(MockableDTOSupaSerializer x:deser){
-        	cpt++;
-			try {
-				//get request hash
-				if (x.defaultvalue){
-					hash = DEFAULT_KEY;
-				}else{
-					hash = getHash(x.request);
-				}
-				
-				//Convert deser response LinkedHashMap to expected POJO
-				Class<?> responseClass = Class.forName(x.responseCanonicalName);
-				x.response = mapper.convertValue(x.response, responseClass);
-				
-				//Store
-				res.put(hash, x);
-			} catch (Exception e) {
-				LOG.error("While reading JSON the {}th mock response for", cpt);
-				LOG.error("Unable to cast JSON mock response attribut in {} Maybe the object has change and not the recorded data", x.responseCanonicalName, e);
-			}
+        for (MockableDTOSupaSerializer x : deser) {
+            cpt++;
+            try {
+                // get request hash
+                if (x.defaultvalue) {
+                    hash = DEFAULT_KEY;
+                } else {
+                    hash = getHash(x.request);
+                }
+
+                // Convert deser response LinkedHashMap to expected POJO
+                Class<?> responseClass = Class.forName(x.responseCanonicalName);
+                x.response = mapper.convertValue(x.response, responseClass);
+
+                // Store
+                res.put(hash, x);
+            } catch (Exception e) {
+                LOG.error("While reading JSON the {}th mock response for", cpt);
+                LOG.error("Unable to cast JSON mock response attribut in {} Maybe the object has change and not the recorded data", x.responseCanonicalName, e);
+            }
         }
-        
+
         return res;
 
         // String hash = getHash(query);
@@ -279,16 +272,15 @@ public class JSONSupaMockManager {
             boolean dtoreq = false;
 
             // entry exists ?
-//            if (query.length == 1) {
-//                stringreq = query[0] instanceof String;
-//                dtoreq = query[0] instanceof MockableDTO;
-//                if (!(stringreq || dtoreq)) {
-//                    complexreq = true;
-//                    // throw new DAOException("Not possible to manage MockData for a " + query.getClass().getSimpleName() + " object, first argument of DAO should be a request, either a String or a MockableDTO");
-//                }
-//            } else {
-                
-            	
+            // if (query.length == 1) {
+            // stringreq = query[0] instanceof String;
+            // dtoreq = query[0] instanceof MockableDTO;
+            // if (!(stringreq || dtoreq)) {
+            // complexreq = true;
+            // // throw new DAOException("Not possible to manage MockData for a " + query.getClass().getSimpleName() + " object, first argument of DAO should be a request, either a String or a MockableDTO");
+            // }
+            // } else {
+
             complexreq = true;
 
             // if not exists create empty entry
@@ -385,39 +377,39 @@ public class JSONSupaMockManager {
 
     }
 
-//    private static void recordMockableDTOReq(final String classname, final String methodname, final MockableDTO req, final MockableDTO resp) throws JsonProcessingException {
-//        final String mockId = classname + "." + methodname;
-//
-//        // get datamap for this dao/method
-//        final HashMap<String, MockableDTOSerializer> datamap = dtoserializers.get(mockId);
-//
-//        // get hash for req
-//        final String hash = getHash(req);
-//
-//        // remove record if exists
-//        if (datamap.containsKey(hash)) {
-//            datamap.remove(hash);
-//        }
-//
-//        final MockableDTOSerializer serialized = new MockableDTOSerializer(req, resp);
-//
-//        // create default if empty
-//        if (datamap.size() == 0) {
-//            datamap.put(DEFAULT_KEY, serialized);
-//        }
-//
-//        datamap.put(hash, serialized);
-//
-//        try {
-//            throw new RuntimeException("rien à faire ici");
-//            // final File in = getMockWriteFile(mockId);
-//            // mapper.writeValue(in, datamap);
-//        } catch (final Exception e) {
-//            LOG.error("Impossible d'enregistrer le JSON pour {}", mockId, e);
-//        }
-//        throw new RuntimeException("rien à faire ici");
-//
-//    }
+    // private static void recordMockableDTOReq(final String classname, final String methodname, final MockableDTO req, final MockableDTO resp) throws JsonProcessingException {
+    // final String mockId = classname + "." + methodname;
+    //
+    // // get datamap for this dao/method
+    // final HashMap<String, MockableDTOSerializer> datamap = dtoserializers.get(mockId);
+    //
+    // // get hash for req
+    // final String hash = getHash(req);
+    //
+    // // remove record if exists
+    // if (datamap.containsKey(hash)) {
+    // datamap.remove(hash);
+    // }
+    //
+    // final MockableDTOSerializer serialized = new MockableDTOSerializer(req, resp);
+    //
+    // // create default if empty
+    // if (datamap.size() == 0) {
+    // datamap.put(DEFAULT_KEY, serialized);
+    // }
+    //
+    // datamap.put(hash, serialized);
+    //
+    // try {
+    // throw new RuntimeException("rien à faire ici");
+    // // final File in = getMockWriteFile(mockId);
+    // // mapper.writeValue(in, datamap);
+    // } catch (final Exception e) {
+    // LOG.error("Impossible d'enregistrer le JSON pour {}", mockId, e);
+    // }
+    // throw new RuntimeException("rien à faire ici");
+    //
+    // }
 
     private static void recordObjectArrayReq(final String classname, final String methodname, final Object[] req, final MockableDTO resp) throws JsonProcessingException {
         final String mockId = classname + "." + methodname;
@@ -458,7 +450,7 @@ public class JSONSupaMockManager {
             // don't record hash
             mapper.writeValue(in, new ArrayList<MockableDTOSupaSerializer>(datamap.values()));
             String res = mapper.writeValueAsString(new ArrayList<MockableDTOSupaSerializer>(datamap.values()).toArray());
-            //LOG.debug(res);
+            // LOG.debug(res);
         } catch (final Exception e) {
             LOG.error("Impossible d'enregistrer le JSON pour {}", mockId, e);
         }
@@ -475,9 +467,9 @@ public class JSONSupaMockManager {
 
             boolean stringreq = false;
 
-//            if ((req.length == 1) && (req[0] instanceof String)) {
-//            	stringreq = true;
-//            }
+            // if ((req.length == 1) && (req[0] instanceof String)) {
+            // stringreq = true;
+            // }
             // if mockdata exists
             if (stringreq) {
                 recordStringReq(classname, methodname, (String) req[0], (MockableDTO) resp);
@@ -499,11 +491,10 @@ public class JSONSupaMockManager {
 
         try {
 
+            res = getMockDataForObjectArray(mockId, query);
 
-			res = getMockDataForObjectArray(mockId, query);
+            // sleep management
 
-			//sleep management
-			
             if ("true".equalsIgnoreCase(conf.getProperty("dao.all.mock.will.sleep", "false"))) {
 
                 if (conf.containsKey("dao." + mockId + ".mock.sleep")) {
@@ -539,7 +530,7 @@ public class JSONSupaMockManager {
         final String hash = getHash(req);
 
         if (objArraySerializers.get(mockId).containsKey(hash)) {
-        	
+
             res = (MockableDTO) objArraySerializers.get(mockId).get(hash).getResp();
             LOG.debug("Mock --> Deserialize {} ok: specific value returned", mockId);
         } else {

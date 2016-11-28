@@ -1,3 +1,4 @@
+
 package play.ground.injection;
 
 import java.lang.management.ManagementFactory;
@@ -23,36 +24,36 @@ import play.ground.servlet.metrics.MetricsServletContextListener;
 
 public class MetricsModule extends AbstractModule {
 
-	static final Logger log = LoggerFactory.getLogger(MetricsModule.class);
+    static final Logger log = LoggerFactory.getLogger(MetricsModule.class);
 
-	private void registerAll(String prefix, MetricSet metricSet, MetricRegistry registry) {
-	    for (Entry<String, Metric> entry : metricSet.getMetrics().entrySet()) {
-	        if (entry.getValue() instanceof MetricSet) {
-	            registerAll(prefix + "." + entry.getKey(), (MetricSet) entry.getValue(), registry);
-	        } else {
-	            registry.register(prefix + "." + entry.getKey(), entry.getValue());
-	        }
-	    }
-	}	
-	protected void configure() {		
-		MetricRegistry mr = new MetricRegistry();
-		
-		registerAll("gc", new GarbageCollectorMetricSet(), mr);
-		registerAll("buffers", new BufferPoolMetricSet(ManagementFactory.getPlatformMBeanServer()), mr);
-		registerAll("memory", new MemoryUsageGaugeSet(), mr);
-		registerAll("threads", new ThreadStatesGaugeSet(), mr);
-		
-		bind(MetricRegistry.class).toInstance(mr);
-		log.info("MetricsModule mr:" + mr.toString());
-		
-		HealthCheckRegistry hr = new HealthCheckRegistry();
-		bind(HealthCheckRegistry.class).toInstance(hr);
-		log.info("MetricsModule hr:" + hr.toString());
-		
-		bind(MetricsServletContextListener.class);
-		bind(HealthCheckServletContextListener.class);
-		bind(InstFilterContextListener.class);
-		this.install(new MetricsInstrumentationModule(mr));
-		//this.install(new HealthCheckModule());
-	}
+    private void registerAll(String prefix, MetricSet metricSet, MetricRegistry registry) {
+        for (Entry<String, Metric> entry : metricSet.getMetrics().entrySet()) {
+            if (entry.getValue() instanceof MetricSet) {
+                registerAll(prefix + "." + entry.getKey(), (MetricSet) entry.getValue(), registry);
+            } else {
+                registry.register(prefix + "." + entry.getKey(), entry.getValue());
+            }
+        }
+    }
+
+    protected void configure() {
+        MetricRegistry mr = new MetricRegistry();
+
+        registerAll("gc", new GarbageCollectorMetricSet(), mr);
+        registerAll("buffers", new BufferPoolMetricSet(ManagementFactory.getPlatformMBeanServer()), mr);
+        registerAll("memory", new MemoryUsageGaugeSet(), mr);
+        registerAll("threads", new ThreadStatesGaugeSet(), mr);
+
+        bind(MetricRegistry.class).toInstance(mr);
+        log.info("MetricsModule mr:" + mr.toString());
+
+        HealthCheckRegistry hr = new HealthCheckRegistry();
+        bind(HealthCheckRegistry.class).toInstance(hr);
+        log.info("MetricsModule hr:" + hr.toString());
+
+        bind(MetricsServletContextListener.class);
+        bind(HealthCheckServletContextListener.class);
+        bind(InstFilterContextListener.class);
+        install(new MetricsInstrumentationModule(mr));
+    }
 }
