@@ -15,11 +15,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import play.ground.assertion.AbstractTest;
+import play.ground.assertion.AbstractAssertTest;
 import play.ground.assertion.objects.Personnage;
 import play.ground.assertion.objects.Personnage.Race;
 
-public class JunitAssert extends AbstractTest{
+public class JunitAssert extends AbstractAssertTest{
 
 	@Test
 	public void test_null(){

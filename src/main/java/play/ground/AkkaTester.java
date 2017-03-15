@@ -40,6 +40,7 @@ import play.ground.injection.MetricsModule;
 import play.ground.injection.ServiceModule;
 import play.ground.servlet.metrics.HealthCheckServletContextListener;
 import play.ground.servlet.metrics.MetricsServletContextListener;
+import play.ground.HelloAkka;
 
 
 
@@ -67,6 +68,7 @@ public class AkkaTester
     	ServiceModule serviceModule = new ServiceModule();
     	ApplicationServletModule applicationServletModule = new ApplicationServletModule();
     	MetricsModule mm = new MetricsModule(); 
+    	
     	Injector injector = Guice.createInjector(serviceModule, applicationServletModule, daoModule, mm);
     	
     	Server server = new Server(7070);
@@ -94,8 +96,8 @@ public class AkkaTester
         
         ServletContextHandler metricsContextHandler = new ServletContextHandler();
         metricsContextHandler.setContextPath("/metrics");
-        metricsContextHandler.addEventListener(injector.getInstance(MetricsServletContextListener.class));
-        metricsContextHandler.addEventListener(injector.getInstance(HealthCheckServletContextListener.class));
+        //metricsContextHandler.addEventListener(injector.getInstance(MetricsServletContextListener.class));
+        //metricsContextHandler.addEventListener(injector.getInstance(HealthCheckServletContextListener.class));
         metricsContextHandler.addServlet(AdminServlet.class,"/admin");
         metricsContextHandler.addServlet(MetricsServlet.class,"/admin/metrics");
         metricsContextHandler.addServlet(PingServlet.class,"/admin/ping");

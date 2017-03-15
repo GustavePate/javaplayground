@@ -15,6 +15,7 @@ import play.ground.core.dao.mock.AbstractMock;
 import play.ground.core.dao.mock.MockableDTO;
 import play.ground.core.dao.mock.business.model.MockableDTOSerializer;
 import play.ground.exception.DAOException;
+
 import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,10 +43,6 @@ public abstract class AbstractDAO {
 
     protected boolean iserror = false;
 
-    @Named("props.application")
-    @Inject
-    protected Properties props;
-    
 	@Inject
 	@Named("conf")
 	protected Config conf;
@@ -108,8 +105,8 @@ public abstract class AbstractDAO {
     private File getMockWriteFile(final String daoName) {
         // Recuperation du chemin du JSON
         String mockDir = "";
-        if (props.containsKey("mock.json.write.path")) {
-            mockDir = props.getProperty("mock.json.write.path");
+        if (conf.hasPath("mock.json.write.path")) {
+            mockDir = conf.getString("mock.json.write.path");
         } else {
             mockDir = System.getProperty("java.io.tmpdir");
         }
@@ -199,7 +196,7 @@ public abstract class AbstractDAO {
     }
 
     protected <Q> void dump2json(final Q query, final MockableDTO resp) throws DAOException {
-        if (props.getProperty("dao.dump.to.json", "false").equals("true")) {
+        if (conf.getString("dao.dump.to.json").equals("true")) {
 
             checkenv();
 

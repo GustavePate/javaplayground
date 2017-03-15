@@ -18,8 +18,8 @@ public class ExempleDAOMock extends AbstractMock implements ExempleDAO {
 
         // dto = (ExempleDTO) getFromJson(data);
 
-        if (props.contains("mock.exempledao.sleep")) {
-            Thread.sleep((int) props.get("mock.exempledao.sleep"));
+        if (conf.hasPath("mock.exempledao.sleep")) {
+            Thread.sleep(conf.getInt("mock.exempledao.sleep"));
         }
 
         return dto;

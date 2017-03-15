@@ -1,5 +1,6 @@
 package play.ground.annotation.mockable;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +40,7 @@ public class MockableTest {
 	
 	
 	@Test
+	@Ignore
 	public void doit(){
 		
 		Injector injector = Guice.createInjector(new ThisTestModule());

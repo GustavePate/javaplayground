@@ -10,6 +10,7 @@ import com.codahale.metrics.Metric;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.MetricSet;
 import com.codahale.metrics.health.HealthCheckRegistry;
+import com.codahale.metrics.json.HealthCheckModule;
 import com.codahale.metrics.jvm.BufferPoolMetricSet;
 import com.codahale.metrics.jvm.GarbageCollectorMetricSet;
 import com.codahale.metrics.jvm.MemoryUsageGaugeSet;
@@ -53,6 +54,7 @@ public class MetricsModule extends AbstractModule {
 		bind(HealthCheckServletContextListener.class);
 		bind(InstFilterContextListener.class);
 		this.install(new MetricsInstrumentationModule(mr));
-		//this.install(new HealthCheckModule());
+		
+		
 	}
 }

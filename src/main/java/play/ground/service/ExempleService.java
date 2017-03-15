@@ -13,7 +13,7 @@ import com.google.inject.Inject;
 import play.ground.dao.exemple.ExempleDAO;
 import play.ground.dao.exemple.dto.ExempleDTO;
  
-public class ExempleService extends GenericService{
+public class ExempleService extends AbstractService{
 
 	static final Logger log = LoggerFactory.getLogger(ExempleService.class);
 	

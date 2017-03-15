@@ -19,7 +19,7 @@ import play.ground.dao.exemple.actor.ExempleDAOActor;
 import play.ground.dao.exemple.dto.ExempleDTO;
 import scala.concurrent.duration.Duration;
 
-public class AkkaService extends GenericService {
+public class AkkaService extends AbstractService {
 	HttpServletRequest req;
 	HttpServletResponse resp;
 

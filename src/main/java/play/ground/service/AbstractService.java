@@ -7,7 +7,7 @@ import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Timer;
 import com.google.inject.Inject;
 
-public abstract class GenericService {
+public abstract class AbstractService {
 
 	long startTime = 0;
 	

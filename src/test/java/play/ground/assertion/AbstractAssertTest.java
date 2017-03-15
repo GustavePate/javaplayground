@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import play.ground.assertion.objects.Personnage;
 import play.ground.assertion.objects.Personnage.Race;
 
-public abstract class AbstractTest {
+public abstract class AbstractAssertTest {
 
 	public String nullstr = null;
 	public Personnage frodon = null;
@@ -42,7 +42,7 @@ public abstract class AbstractTest {
 	
 	public abstract void test_error_with_message();
 	
-	public AbstractTest(){
+	public AbstractAssertTest(){
 		
 		frodon = new Personnage("Frodon", true, Race.HOBBIT);
 		sam = new Personnage("Sam", true, Race.HOBBIT);

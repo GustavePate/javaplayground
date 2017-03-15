@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Test;
 
-import play.ground.assertion.AbstractTest;
+import play.ground.assertion.AbstractAssertTest;
 import play.ground.assertion.objects.Personnage;
 import play.ground.assertion.objects.Personnage.Race;
 
-public class SimpleAssert extends AbstractTest{
+public class SimpleAssert extends AbstractAssertTest{
 
 	/*
 	 * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

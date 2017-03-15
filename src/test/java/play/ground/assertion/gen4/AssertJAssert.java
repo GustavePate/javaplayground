@@ -3,11 +3,11 @@ package play.ground.assertion.gen4;
 import static org.assertj.core.api.Assertions.*;
 import org.junit.Test;
 
-import play.ground.assertion.AbstractTest;
+import play.ground.assertion.AbstractAssertTest;
 import play.ground.assertion.objects.Personnage;
 import play.ground.assertion.objects.Personnage.Race;
 
-public class AssertJAssert extends AbstractTest{
+public class AssertJAssert extends AbstractAssertTest{
 
 	@Test
 	public void test_null() {

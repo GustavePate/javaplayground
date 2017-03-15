@@ -32,7 +32,7 @@ public class SocketAppenderTest {
 	@Test
 	public void cut_netcat_while_running_this_one() throws InterruptedException{
 		
-		int nb=80;
+		int nb=2;
 		while (nb > 0){
 			LOG.info("yo" + String.valueOf(nb));
 			Thread.sleep(1000);

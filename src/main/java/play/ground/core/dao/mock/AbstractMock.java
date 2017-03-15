@@ -32,9 +32,9 @@ public abstract class AbstractMock extends AbstractDAO {
     private InputStream readMockData(final String daoName) {
 
         InputStream in;
-        final String mockPath = props.getProperty("mock.json.read.path") + daoName + ".json";
+        final String mockPath = conf.getString("mock.json.read.path") + daoName + ".json";
         try {
-            if (props.containsKey("mock.json.read.path")) {
+            if (conf.hasPath("mock.json.read.path")) {
                 LOG.warn("Lecture du json des mocks dans {}", mockPath);
                 in = new FileInputStream(mockPath);
             } else {

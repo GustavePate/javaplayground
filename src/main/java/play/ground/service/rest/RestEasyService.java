@@ -13,12 +13,13 @@ import org.slf4j.LoggerFactory;
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
 
+import play.ground.aop.Test1;
 import play.ground.dao.exemple.ExempleDAO;
 import play.ground.dao.exemple.dto.ExempleDTO;
-import play.ground.service.GenericService;
+import play.ground.service.AbstractService;
 
 @Path("/rest/hello")
-public class RestEasyService extends GenericService{
+public class RestEasyService extends AbstractService{
 	
 	@Inject
 	private ExempleDAO dao;
@@ -26,6 +27,7 @@ public class RestEasyService extends GenericService{
 	protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	@Timed
+	@Test1
 	private HashMap<String, Integer> work(String name){
 		HashMap <String, Integer> resp = new HashMap<String, Integer>();
 		try {
@@ -50,4 +52,10 @@ public class RestEasyService extends GenericService{
 		return resp;
 		
 	}
+	
+	
+
+	
+	
+	
 }
